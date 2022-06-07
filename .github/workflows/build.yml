@@ -29,6 +29,11 @@ jobs:
         GOOS=darwin GOARCH=amd64 go build -o builds/ShareiT-macos-amd64
         GOOS=windows GOARCH=amd64 go build -o builds/ShareiT-windows-amd64.exe
 
+    - name: Setup Android NDK
+      uses: nttld/setup-ndk@v1.0.6
+      with:
+        ndk-version: r19c
+
     - name: Mobile Builds
       run: |
         fyne package --appVersion 0.0.1 --appID net.anjanamadu.shareit --name ShareiT --os android --release true && mv ShareiT.apk builds/ShareiT-android-universal.apk
