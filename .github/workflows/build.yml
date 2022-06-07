@@ -18,17 +18,27 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        sudo apt-get -qq update && sudo apt-get -qq -y install xorg-dev
+        sudo apt-get -qq update && sudo apt-get -qq -y install xorg-dev gcc cpp
         go mod download
         go install fyne.io/fyne/v2/cmd/fyne@latest
+
+    # - name: Desktop Builds
+    #   run: |
+    #     mkdir builds && chmod 777 builds
+    #     GOOS=linux GOARCH=amd64 go build -o builds/ShareiT-linux-amd64
+    #     echo "Linux 64-bit build complete"
+    #     GOOS=linux GOARCH=arm64 go build -o builds/ShareiT-linux-arm64
+    #     echo "Linux arm64-bit build complete"
+    #     GOOS=darwin GOARCH=amd64 go build -o builds/ShareiT-macos-amd64
+    #     echo "MacOS 64-bit build complete"
+    #     GOOS=windows GOARCH=amd64 go build -o builds/ShareiT-windows-amd64.exe
+    #     echo "Windows 64-bit build complete"
 
     - name: Desktop Builds
       run: |
         mkdir builds && chmod 777 builds
-        GOOS=linux GOARCH=amd64 go build -o builds/ShareiT-linux-amd64
-        GOOS=linux GOARCH=arm64 go build -o builds/ShareiT-linux-arm64
-        GOOS=darwin GOARCH=amd64 go build -o builds/ShareiT-macos-amd64
         GOOS=windows GOARCH=amd64 go build -o builds/ShareiT-windows-amd64.exe
+        echo "Windows 64-bit build complete"
 
     - name: Setup Android NDK
       uses: nttld/setup-ndk@v1.0.6
@@ -38,9 +48,13 @@ jobs:
     - name: Mobile Builds
       run: |
         fyne package --appVersion 0.0.1 --appID net.anjanamadu.shareit --name ShareiT --os android --release true && mv ShareiT.apk builds/ShareiT-android-universal.apk
+        echo "Android build universal complete"
         fyne package --appVersion 0.0.1 --appID net.anjanamadu.shareit --name ShareiT --os android/arm --release true && mv ShareiT.apk builds/ShareiT-android-arm.apk
+        echo "Android build arm complete"
         fyne package --appVersion 0.0.1 --appID net.anjanamadu.shareit --name ShareiT --os android/arm64 --release true && mv ShareiT.apk builds/ShareiT-android-arm64.apk
+        echo "Android build arm64 complete"
         fyne package --appVersion 0.0.1 --appID net.anjanamadu.shareit --name ShareiT --os android/amd64 --release true && mv ShareiT.apk builds/ShareiT-android-amd64.apk
+        echo "Android build amd64 complete"
 
     - name: Create Release
       uses: ncipollo/release-action@v1.10.0
