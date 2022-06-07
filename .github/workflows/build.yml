@@ -27,8 +27,6 @@ jobs:
         mkdir builds && chmod 777 builds
         GOOS=linux GOARCH=amd64 go build -o builds/ShareiT-linux-amd64
         echo "Linux 64-bit build complete"
-        GOOS=linux GOARCH=arm64 go build -o builds/ShareiT-linux-arm64
-        echo "Linux arm64-bit build complete"
         GOOS=windows GOARCH=amd64 CGO_ENABLED=1 CC=x86_64-w64-mingw32-gcc go build -o builds/ShareiT-windows-amd64.exe
         echo "Windows 64-bit build complete"
 
