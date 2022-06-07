@@ -54,3 +54,4 @@ jobs:
         artifacts: builds/*
         body: "Builds for ShareiT."
         name: "Builds"
+        tag: latest
