@@ -40,7 +40,6 @@ jobs:
         fyne package --appVersion 0.0.1 --appID net.anjanamadu.shareit --name ShareiT --os android/arm --release true && mv ShareiT.apk builds/ShareiT-android-arm.apk
         fyne package --appVersion 0.0.1 --appID net.anjanamadu.shareit --name ShareiT --os android/arm64 --release true && mv ShareiT.apk builds/ShareiT-android-arm64.apk
         fyne package --appVersion 0.0.1 --appID net.anjanamadu.shareit --name ShareiT --os android/amd64 --release true && mv ShareiT.apk builds/ShareiT-android-amd64.apk
-        fyne package --appVersion 0.0.1 --appID net.anjanamadu.shareit --name ShareiT --os ios --release true && mv ShareiT.ipa builds/ShareiT-ios-universal.ipa
 
     - name: Create Release
       uses: ncipollo/release-action@v1.10.0
